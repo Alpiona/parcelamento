@@ -25,10 +25,10 @@ namespace Parcelamento.Models
         public List<Parcela> Parcelas { get; protected set; }
 
 
-        public Simulacao (decimal vlrDebito, int nParcelas)
+        public Simulacao (decimal vlrDebito, int numParcelas)
         {
             ValorDebito = vlrDebito;
-            NumParcelas = nParcelas;
+            NumParcelas = numParcelas;
             Parcelas = CalculaParcelas(NumParcelas);
         }
 
