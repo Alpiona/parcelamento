@@ -14,7 +14,7 @@ namespace Parcelamento.Controllers
     {
         // GET api/simulacao/5000/5
         [HttpGet("{debito}/{parcelas}")]
-        public IActionResult GetParcelas(decimal debito, int parcelas)
+        public IActionResult Get(decimal debito, int parcelas)
         {
             if (parcelas > 60)
                 return BadRequest("O número de parcelas máximo é 60");
@@ -37,13 +37,7 @@ namespace Parcelamento.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Simulacao resultado)
         {
-            if (resultado.ValorDebito > 2000 && resultado.Parcelas.First().ValorParcela < 200)
-                return BadRequest("O valor da menor parcela não pode ser inferior a 200,00 para valor total superior a 2.000,00");
-
-            else if (resultado.ValorDebito <= 2000 && resultado.Parcelas.First().ValorParcela < 50)
-                return BadRequest("O valor da menor parcela não pode ser inferior a 50,00 para valor igual ou inferior a 2.000,00");
-
-            else if (resultado == null)
+            if (resultado == null)
                 return BadRequest("Alguma informação está ausente, ou inválida");
 
             else if (resultado.NumParcelas > 60)
@@ -51,6 +45,12 @@ namespace Parcelamento.Controllers
 
             else if (resultado.NumParcelas < 2)
                 return BadRequest("O número de parcelas precisa ser maior que 2");
+
+            else if (resultado.ValorDebito > 2000 && resultado.Parcelas.First().ValorParcela < 200)
+                return BadRequest("O valor da menor parcela não pode ser inferior a 200,00 para valor total superior a 2.000,00");
+
+            else if (resultado.ValorDebito <= 2000 && resultado.Parcelas.First().ValorParcela < 50)
+                return BadRequest("O valor da menor parcela não pode ser inferior a 50,00 para valor igual ou inferior a 2.000,00");
 
             return Ok(resultado);
         }

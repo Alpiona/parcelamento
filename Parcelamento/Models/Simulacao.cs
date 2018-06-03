@@ -30,6 +30,8 @@ namespace Parcelamento.Models
             ValorDebito = vlrDebito;
             NumParcelas = numParcelas;
             Parcelas = CalculaParcelas(NumParcelas);
+            TotalParcelamento = Math.Truncate(100 * TotalParcelamento) / 100;
+            TotalCorrecao = Math.Truncate(100 * TotalCorrecao) / 100;
         }
 
         private List<Parcela> CalculaParcelas(int nParcelas)
@@ -52,10 +54,6 @@ namespace Parcelamento.Models
                 TotalCorrecao += correcao;
             }
 
-            ValorDebito = Math.Truncate(100 * ValorDebito) / 100;
-            TotalParcelamento = Math.Truncate(100 * TotalParcelamento) / 100;
-            TotalCorrecao = Math.Truncate(100 * TotalCorrecao) / 100;
-
             return listaParcelas;
         }
 
@@ -77,5 +75,6 @@ namespace Parcelamento.Models
             string vencString = "15/" + mes + "/" + ano;
             return Convert.ToDateTime(vencString);
         }
+
     }
 }
