@@ -11,7 +11,6 @@ GET /api/simulacao/{vlrDebito}/{numParcelas}
 Ex: /api/simulacao/1234.24/10
 ```
 # Método POST
-* Para fazer a simulação usando POST é nessário as informações serem enviadas como JSON.
 ```
 POST /api/simulacao/
 ```
